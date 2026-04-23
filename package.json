@@ -1,0 +1,19 @@
+{
+  "name": "Scholastic",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.0.0",
+    "@hono/swagger-ui": "^0.6.1",
+    "bcryptjs": "^3.0.3",
+    "hono": "^4.12.14"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.0.0",
+    "@types/bun": "latest",
+    "prisma": "^6.0.0"
+  }
+}
