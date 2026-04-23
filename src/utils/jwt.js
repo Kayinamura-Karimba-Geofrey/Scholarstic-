@@ -1,14 +1,10 @@
-import {sign,verify} from 'hono/jwt';
-const JWT_SECRET='supersecretkey';
+import { sign, verify } from '@hono/jwt'
+import { env } from '../config/env.js'
 
-export const generateToken= (payload)=>{
-    return sign(payload, JWT_SECRET) 
+export const generateToken = (payload) => {
+  return sign(payload, env.JWT_SECRET)
 }
 
-export const verifyToken= (token)=>{
-    try {
-        return verify(token, JWT_SECRET);
-    } catch (error) {
-        return null;
-    }
+export const verifyToken = (token) => {
+  return verify(token, env.JWT_SECRET)
 }
