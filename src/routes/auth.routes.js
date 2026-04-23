@@ -1,7 +1,12 @@
-import {Hono} from 'hono';
-import { register,login } from '../controllers/auth.controller.js';
+import { Hono } from 'hono'
+import { zValidator } from '@hono/zod-validator'
+import { register, login } from '../controllers/auth.controller.js'
+import { registerSchema, loginSchema } from '../validator/auth.validator.js'
+import { createRequire } from 'module';
 
-export const authRoutes = new Hono();
+const require = createRequire(import.meta.url);
 
-authRoutes.post('/register', register)
-authRoutes.post('/login', login)
+export const authRoutes = new Hono()
+
+authRoutes.post('/register', zValidator('json', registerSchema), register)
+authRoutes.post('/login', zValidator('json', loginSchema), login)

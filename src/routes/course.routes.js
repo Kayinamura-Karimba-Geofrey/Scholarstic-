@@ -1,8 +1,10 @@
 import { Hono } from 'hono'
+import { zValidator } from '@hono/zod-validator'
 import { create, getAll } from '../controllers/course.controller.js'
 import { authMiddleware } from '../middleware/auth.middleware.js'
 import { requireRole } from '../middleware/role.middleware.js'
 import { ROLES } from '../constants/roles.js'
+import { courseSchema } from '../validator/course.validator.js'
 
 export const courseRoutes = new Hono()
 
@@ -11,6 +13,7 @@ courseRoutes.post(
   '/',
   authMiddleware,
   requireRole(ROLES.ADMIN),
+  zValidator('json', courseSchema),
   create
 )
 
@@ -20,4 +23,4 @@ courseRoutes.get(
   authMiddleware,
   requireRole(ROLES.ADMIN, ROLES.TEACHER, ROLES.STUDENT),
   getAll
-)
+)

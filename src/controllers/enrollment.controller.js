@@ -2,7 +2,7 @@ import { enrollStudent } from '../services/enrollment.service.js'
 
 export const enroll = async (c) => {
   const user = c.get('user')
-  const body = await c.req.json()
+  const body = c.req.valid('json')
 
   const enrollment = await enrollStudent(
     user.id,
@@ -10,4 +10,4 @@ export const enroll = async (c) => {
   )
 
   return c.json(enrollment, 201)
-}
+}
